@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { ServersService } from '../servers.service';
 
@@ -12,9 +13,19 @@ export class EditServerComponent implements OnInit {
   serverName = '';
   serverStatus = '';
 
-  constructor(private serversService: ServersService) { }
+  constructor(private serversService: ServersService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+
+    // Retrieve Query Parameters and fragments - On initialization, when data doesn't change on the page
+    console.log(this.route.snapshot.queryParams);
+    console.log(this.route.snapshot.fragment);
+
+    // React to changed Query Parameters and fragments - Subscribing to an observable - like when fetching Route Parameters
+    this.route.queryParams.subscribe();
+    this.route.fragment.subscribe();
+
     this.server = this.serversService.getServer(1);
     this.serverName = this.server.name;
     this.serverStatus = this.server.status;
