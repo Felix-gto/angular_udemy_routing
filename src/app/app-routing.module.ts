@@ -21,7 +21,11 @@ const appRoutes: Routes = [
       { path: ':id/:name', component: UserComponent },  // Dynamically load some route and encode some data into our path
     ] },
     
-    { path: 'servers', canActivate:[AuthGuard], component: ServersComponent, children: [
+    { path: 'servers',
+    //  canActivate:[AuthGuard], 
+     component: ServersComponent,
+     canActivateChild: [AuthGuard], 
+     children: [
       { path: ':id', component: ServerComponent },
       { path: ':id/edit', component: EditServerComponent }  // Passing Query Parameters and Fragments - Example: Route which allows us to edit a certain server
     ] },
