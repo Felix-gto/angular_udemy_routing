@@ -19,15 +19,16 @@ import { RouterModule, Routes } from '@angular/router';
 // Path '' ( without / ) is equivalent to: http://localhost:4200/ + remember to import the component 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'users', component: UsersComponent },
 
-  { path: 'users/:id/:name', component: UserComponent },  // Dynamically load some route and encode some data into our path
+  { path: 'users', component: UsersComponent, children: [
+    { path: ':id/:name', component: UserComponent },  // Dynamically load some route and encode some data into our path
+  ] },
   
-  { path: 'servers', component: ServersComponent },
-  { path: 'servers/:id', component: ServerComponent },
+  { path: 'servers', component: ServersComponent, children: [
+    { path: ':id', component: ServerComponent },
+    { path: ':id/edit', component: EditServerComponent }  // Passing Query Parameters and Fragments - Example: Route which allows us to edit a certain server
+  ] }
 
-  // Passing Query Parameters and Fragments - Example: Route which allows us to edit a certain server
-  { path: 'servers/:id/edit', component: EditServerComponent }
 ];
 
 @NgModule({
