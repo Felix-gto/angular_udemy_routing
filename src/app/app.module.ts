@@ -22,7 +22,9 @@ const appRoutes: Routes = [
   { path: 'users', component: UsersComponent },
 
   { path: 'users/:id/:name', component: UserComponent },  // Dynamically load some route and encode some data into our path
+  
   { path: 'servers', component: ServersComponent },
+  { path: 'servers/:id', component: ServerComponent },
 
   // Passing Query Parameters and Fragments - Example: Route which allows us to edit a certain server
   { path: 'servers/:id/edit', component: EditServerComponent }
