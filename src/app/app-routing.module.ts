@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 // Import Angular Routing Modules
 import { Routes, RouterModule } from "@angular/router";
 import { AuthGuard } from "./auth-guard.service";
+import { ErrorPageComponent } from "./error-page/error-page.component";
 
 import { HomeComponent } from "./home/home.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
@@ -32,7 +33,10 @@ const appRoutes: Routes = [
     ] },
   
     // Redirecting to page-not-found
-    {path: 'page-not-found', component: PageNotFoundComponent},
+    // {path: 'page-not-found', component: PageNotFoundComponent},
+
+    // ErrorPageComponent - pass static data with the data property - allows us to pass an object where we can define any key-value pairs
+    {path: 'page-not-found', component: ErrorPageComponent, data: {message: "Page not found!"}},
     {path: '**', redirectTo: 'page-not-found'}  // ** = wildcard route - catches unknown paths   ->   needs to be the last one in the array of routes (appRoutes)
   
 ];
