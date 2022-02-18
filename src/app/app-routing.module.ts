@@ -48,7 +48,10 @@ const appRoutes: Routes = [
 
     imports: [
         // Import the RouterModule and pass your appRoutes constant as an argument -> registers the routes
-        RouterModule.forRoot(appRoutes)
+        // RouterModule.forRoot(appRoutes)
+
+        // Alternative: using Hash #  -> works on deployment even on servers which don't return the index.html file in case of 404 errors.
+        RouterModule.forRoot(appRoutes, {useHash: true})
     ],
 
     exports: [ RouterModule ]  // Export the configured RouterModule
