@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router, Data } from '@angular/router';
 
 import { ServersService } from '../servers.service';
 
@@ -17,14 +17,19 @@ export class ServerComponent implements OnInit {
 
   ngOnInit() {
 
-    // Get the server id from the activated route (fyi if we parse a parameter from the url it will always be a string   ->  convert string to number by adding + in front)
-    const id = +this.route.snapshot.params['id'];
-    this.server = this.serversService.getServer(id);
-
-    // React to any future changes by subscribing to observables and get the new server
-    this.route.params.subscribe((params: Params) => {
-      this.server = this.serversService.getServer(+params['id']);
+    // Using the ServerResolver to run some code / fetch some data before the route is rendered
+    this.route.data.subscribe((data: Data) => {
+      this.server = data['server'];
     });
+
+    // // Get the server id from the activated route (fyi if we parse a parameter from the url it will always be a string   ->  convert string to number by adding + in front)
+    // const id = +this.route.snapshot.params['id'];
+    // this.server = this.serversService.getServer(id);
+
+    // // React to any future changes by subscribing to observables and get the new server
+    // this.route.params.subscribe((params: Params) => {
+    //   this.server = this.serversService.getServer(+params['id']);
+    // });
 
   }
 
